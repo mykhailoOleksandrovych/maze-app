@@ -1,0 +1,26 @@
+<div>
+  <label for="rows">Rows:</label>
+  <input id="rows" [(ngModel)]="rows" type="number" min="1" />
+  <label for="cols">Cols:</label>
+  <input id="cols" [(ngModel)]="cols" type="number" min="1" />
+  <button (click)="generateNewMaze()">Generate New Maze</button>
+</div>
+
+<div *ngIf="loading" class="overlay">
+    <div class="spinner"></div>
+</div>
+
+<table>
+  <tr *ngFor="let row of maze; let rowIndex = index">
+    <td *ngFor="let cell of row; let colIndex = index"
+    [style.height.px]="200 / rows"
+    [ngClass]="{
+      wall: cell === -1,
+      empty: cell === 0,
+      purple: cell === 2,
+      yellow: cell === 3
+    }"
+    (mouseenter)="onMouseEnter(rowIndex, colIndex)"></td>
+  </tr>
+</table>
+  
